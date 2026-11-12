@@ -1,0 +1,426 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HERBORA | Rooted in Nature</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --green:#10291f;
+  --leaf:#557b4b;
+  --cream:#f5f1e7;
+  --gold:#c49a58;
+  --paper:#fbf9f3;
+  --text:#25352a;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--text);overflow-x:hidden}
+button,a{font:inherit}
+a{text-decoration:none;color:inherit}
+button{cursor:pointer}
+.progress{position:fixed;top:0;left:0;height:3px;background:var(--gold);z-index:999;width:0}
+header{position:sticky;top:0;z-index:100;background:#fbf9f3ee;backdrop-filter:blur(14px);border-bottom:1px solid #ddd8c9}
+nav{max-width:1200px;margin:auto;height:75px;padding:0 25px;display:flex;align-items:center;justify-content:space-between}
+.logo{font:600 28px 'Playfair Display';letter-spacing:5px;color:var(--green)}
+.logo span{color:var(--gold)}
+.links{display:flex;gap:30px}
+.links a{font-size:11px;letter-spacing:2px;text-transform:uppercase}
+.links a:hover{color:var(--gold)}
+.cart{border:1px solid #d8d0bd;background:none;padding:12px 17px;color:var(--green)}
+.menu{display:none;background:none;border:0;font-size:25px}
+.hero{min-height:650px;background:var(--cream);display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:70px max(calc((100% - 1150px)/2),30px);gap:30px;overflow:hidden}
+.eyebrow{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--leaf)}
+h1{font:400 clamp(55px,7vw,88px)/1.02 'Playfair Display';color:var(--green);margin:25px 0}
+h1 em{color:var(--leaf)}
+.hero p,.section-intro{color:#69766b;line-height:1.9;font-size:14px;max-width:440px}
+.actions{display:flex;gap:13px;margin-top:30px;flex-wrap:wrap}
+.btn{padding:15px 24px;border:1px solid var(--green);background:var(--green);color:white;font-size:10px;letter-spacing:2px;text-transform:uppercase;transition:.3s}
+.btn:hover{background:var(--leaf);transform:translateY(-3px)}
+.btn.light{background:transparent;color:var(--green)}
+.visual{height:480px;display:grid;place-items:center;position:relative}
+.circle{position:absolute;width:390px;height:390px;border:1px solid #a8b59b;border-radius:50%;animation:spin 35s linear infinite}
+.bottle{width:165px;height:285px;position:relative;border-radius:25px 25px 32px 32px;background:linear-gradient(90deg,#68411f,#bd8842,#865326);box-shadow:0 30px 35px #35281955;animation:float 4s ease-in-out infinite}
+.cap{position:absolute;width:72px;height:60px;background:linear-gradient(90deg,#14251b,#40513a,#14251b);top:-53px;left:46px;border-radius:7px}
+.label{position:absolute;top:75px;left:12px;right:12px;height:165px;background:#f2e8d4;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:var(--green)}
+.label small{font-size:8px;letter-spacing:3px}
+.label strong{font:26px 'Playfair Display';letter-spacing:3px;margin:10px}
+.label span{color:var(--leaf);font-size:25px}
+.float-note{position:absolute;background:white;padding:15px 20px;font:italic 15px 'Playfair Display';box-shadow:0 10px 30px #0001}
+.note1{top:15%;right:0}.note2{bottom:15%;left:0}
+.trust{background:var(--green);color:#f5f1e7;display:flex;justify-content:space-around;gap:20px;flex-wrap:wrap;padding:25px;font-size:10px;letter-spacing:2px;text-align:center}
+section{padding:100px 25px}
+.container{max-width:1150px;margin:auto}
+.heading{text-align:center;margin-bottom:50px}
+.heading h2,.story h2{font:400 clamp(38px,5vw,58px) 'Playfair Display';color:var(--green);margin:15px 0}
+.heading p{font-size:13px;color:#788277;line-height:1.8;max-width:550px;margin:auto}
+.story{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:65px}
+.story img{width:100%;height:480px;object-fit:cover}
+.story p{font-size:13px;line-height:2;color:#69766b;margin:18px 0}
+.ingredients{background:#edf0e7}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.card{background:white;padding:13px 13px 23px;transition:.35s;cursor:pointer}
+.card:hover{transform:translateY(-9px);box-shadow:0 18px 40px #10291f18}
+.card img{width:100%;height:175px;object-fit:cover}
+.card h3{font:23px 'Playfair Display';margin:17px 5px 7px;color:var(--green)}
+.card p{font-size:11px;color:#788277;line-height:1.7;margin:0 5px}
+.ritual-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:25px}
+.ritual{padding:35px;background:var(--cream);text-align:center}
+.ritual b{font:40px 'Playfair Display';color:var(--gold)}
+.ritual h3{font:25px 'Playfair Display';margin:15px}
+.ritual p{font-size:12px;color:#778276;line-height:1.8}
+.product{background:var(--green);color:white}
+.product-layout{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:70px}
+.product-art{min-height:390px;background:#203b2c;display:grid;place-items:center}
+.product h2{font:48px 'Playfair Display';margin:15px 0}
+.product p{color:#c6d0c2;font-size:13px;line-height:1.9}
+.price{font:30px 'Playfair Display';color:var(--gold);margin:22px 0}
+.sizes{display:flex;gap:10px;margin:20px 0}
+.sizes button{padding:11px 17px;background:transparent;color:white;border:1px solid #819181}
+.sizes button.active{background:var(--gold);color:var(--green);border-color:var(--gold)}
+.quantity{display:flex;align-items:center;gap:18px;margin:20px 0}
+.quantity button{width:32px;height:32px;background:transparent;border:1px solid #819181;color:white}
+.quiz{background:var(--cream);text-align:center}
+.quiz-box{max-width:650px;margin:auto;background:white;padding:40px}
+.quiz-box h3{font:30px 'Playfair Display';margin:15px}
+.quiz-options{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:25px 0}
+.quiz-options button{padding:15px;background:var(--paper);border:1px solid #ddd8c9}
+.quiz-options button.selected{background:var(--green);color:white}
+.review{max-width:700px;margin:auto;text-align:center}
+.review blockquote{font:italic 28px 'Playfair Display';line-height:1.6;color:var(--green);margin:25px 0}
+.review button{background:none;border:1px solid #cfc8b8;padding:12px 18px;margin:10px}
+.faq{max-width:750px;margin:auto}
+.faq-item{border-bottom:1px solid #ddd8c9;padding:20px 0}
+.faq-question{background:none;border:0;width:100%;display:flex;justify-content:space-between;text-align:left;font:20px 'Playfair Display';color:var(--green)}
+.faq-answer{display:none;color:#778276;font-size:13px;line-height:1.8;padding:15px 0}
+.faq-item.open .faq-answer{display:block}
+.newsletter{background:#edf0e7;text-align:center}
+.newsletter input{padding:16px;border:1px solid #c9d0c1;background:white;min-width:240px;margin:10px}
+footer{background:var(--green);color:#e9e5d9;padding:55px 25px;text-align:center}
+footer .logo{color:white;margin-bottom:15px}
+footer p{font-size:11px;color:#b7c2b4;margin:12px}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .8s,transform .8s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.toast{position:fixed;bottom:25px;right:25px;background:var(--green);color:white;padding:16px 22px;opacity:0;transform:translateY(20px);transition:.3s;z-index:300}
+.toast.show{opacity:1;transform:translateY(0)}
+@keyframes float{50%{transform:translateY(-15px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:800px){
+ .hero{grid-template-columns:1fr;text-align:center;padding-top:65px}
+ .hero p{margin:auto}
+ .actions{justify-content:center}
+ .visual{height:400px}
+ .story,.product-layout{grid-template-columns:1fr}
+ .cards{grid-template-columns:repeat(2,1fr)}
+ .ritual-grid{grid-template-columns:1fr}
+ .links{display:none;position:absolute;top:75px;left:0;right:0;background:var(--paper);padding:25px;flex-direction:column}
+ .links.open{display:flex}
+ .menu{display:block}
+}
+@media(max-width:480px){
+ section{padding:70px 18px}
+ .cards{grid-template-columns:1fr 1fr;gap:10px}
+ .card img{height:125px}
+ .card h3{font-size:19px}
+ .quiz-box{padding:25px 15px}
+ .quiz-options{grid-template-columns:1fr}
+ .float-note{font-size:12px}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{animation-duration:.01ms!important;scroll-behavior:auto!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+
+<body>
+<div class="progress" id="progress"></div>
+
+<header>
+<nav>
+  <a class="logo" href="#">HERB<span>ORA</span></a>
+  <div class="links" id="links">
+    <a href="#story">Our story</a>
+    <a href="#ingredients">Ingredients</a>
+    <a href="#ritual">The ritual</a>
+    <a href="#product">Shop</a>
+    <a href="#faq">FAQs</a>
+  </div>
+  <div>
+    <button class="cart" onclick="showCart()">Bag (<span id="cartCount">0</span>)</button>
+    <button class="menu" onclick="document.getElementById('links').classList.toggle('open')">☰</button>
+  </div>
+</nav>
+</header>
+
+<main>
+<section class="hero">
+ <div class="reveal">
+  <div class="eyebrow">Nature's wisdom · Modern ritual</div>
+  <h1>Rooted in<br><em>nature.</em><br>Made for you.</h1>
+  <p>Rediscover the beauty of mindful hair care with a botanical-inspired ritual rooted in the timeless traditions of Ayurveda.</p>
+  <div class="actions">
+   <a class="btn" href="#product">Discover the oil ↗</a>
+   <a class="btn light" href="#story">Our philosophy</a>
+  </div>
+ </div>
+ <div class="visual">
+  <div class="circle"></div>
+  <div class="bottle">
+   <div class="cap"></div>
+   <div class="label"><small>BOTANICAL HAIR OIL</small><strong>HERBORA</strong><span>❧</span><small>ROOTED IN NATURE</small></div>
+  </div>
+  <div class="float-note note1">A little nature, every day.</div>
+  <div class="float-note note2">The art of a slower ritual ✳</div>
+ </div>
+</section>
+
+<div class="trust">
+ <span>✳ BOTANICAL INSPIRED</span>
+ <span>✳ MINDFUL SELF-CARE</span>
+ <span>✳ AYURVEDIC HERITAGE</span>
+ <span>✳ MADE WITH CARE</span>
+</div>
+
+<section id="story">
+ <div class="container story">
+  <img class="reveal" src="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?w=900" alt="Sunlight in a peaceful green botanical landscape">
+  <div class="reveal">
+   <div class="eyebrow">The HERBORA philosophy</div>
+   <h2>Ancient wisdom.<br>Everyday wonder.</h2>
+   <p>Inspired by India's rich botanical heritage, HERBORA celebrates the connection between nature and personal care.</p>
+   <p>We believe a hair-care ritual should be more than a routine. It should be a moment to pause, reconnect and care for yourself.</p>
+   <a class="btn" href="#ingredients">Explore our botanicals</a>
+  </div>
+ </div>
+</section>
+
+<section class="ingredients" id="ingredients">
+ <div class="container">
+  <div class="heading reveal">
+   <div class="eyebrow">Nature's finest</div>
+   <h2>The botanical blend</h2>
+   <p>Inspired by traditional hair-care ingredients, each botanical has a story to tell.</p>
+  </div>
+  <div class="cards">
+   <article class="card reveal">
+    <img src="https://images.unsplash.com/photo-1596591606975-97ee5cef3a1e?w=500" alt="Amla fruit">
+    <h3>Amla</h3><p>A traditional botanical treasured in Indian hair-care rituals.</p>
+   </article>
+   <article class="card reveal">
+    <img src="https://images.unsplash.com/photo-1603905179139-d6c8a0e3b4d2?w=500" alt="Hibiscus flowers">
+    <h3>Hibiscus</h3><p>A vibrant flower often used in traditional beauty preparations.</p>
+   </article>
+   <article class="card reveal">
+    <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=500" alt="Fresh green leaves">
+    <h3>Bhringraj</h3><p>A celebrated herb in Ayurvedic hair-care traditions.</p>
+   </article>
+   <article class="card reveal">
+    <img src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=500" alt="Botanical oil ingredients">
+    <h3>Neem</h3><p>A familiar botanical valued in traditional personal care.</p>
+   </article>
+  </div>
+ </div>
+</section>
+
+<section id="ritual">
+ <div class="container">
+  <div class="heading reveal">
+   <div class="eyebrow">A moment for yourself</div>
+   <h2>Your three-step ritual</h2>
+   <p>Make time for a simple, soothing hair-care moment.</p>
+  </div>
+  <div class="ritual-grid">
+   <div class="ritual reveal"><b>01</b><h3>Warm</h3><p>Take a small amount of oil and gently warm it between your palms.</p></div>
+   <div class="ritual reveal"><b>02</b><h3>Massage</h3><p>Apply gently and massage your scalp with comfortable circular movements.</p></div>
+   <div class="ritual reveal"><b>03</b><h3>Relax</h3><p>Enjoy your ritual, then wash as part of your usual hair-care routine.</p></div>
+  </div>
+</div>
+</section>
+
+<section class="product" id="product">
+ <div class="container product-layout">
+  <div class="product-art">
+   <div class="bottle"><div class="cap"></div><div class="label"><small>BOTANICAL HAIR OIL</small><strong>HERBORA</strong><span>❧</span><small>ROOTED IN NATURE</small></div></div>
+  </div>
+  <div>
+   <div class="eyebrow" style="color:#c49a58">The signature blend</div>
+   <h2>A ritual worth<br>looking forward to.</h2>
+   <p>A botanical-inspired hair oil created to bring a little more intention to your self-care routine.</p>
+   <div class="price" id="price">₹599</div>
+   <div class="sizes">
+    <button class="active" onclick="setSize(599,this)">100 ml</button>
+    <button onclick="setSize(999,this)">200 ml</button>
+   </div>
+   <div class="quantity">
+    <button onclick="changeQty(-1)">−</button>
+    <span id="qty">1</span>
+    <button onclick="changeQty(1)">+</button>
+   </div>
+   <button class="btn" onclick="addCart()">Add to bag ↗</button>
+  </div>
+ </div>
+</section>
+
+<section class="quiz" id="quiz">
+ <div class="quiz-box reveal">
+  <div class="eyebrow">A little discovery</div>
+  <h2 style="font:40px 'Playfair Display';color:var(--green);margin:15px">Find your hair ritual</h2>
+  <p class="section-intro" style="margin:auto">Choose the option that feels closest to you.</p>
+  <h3 id="question">How would you describe your hair?</h3>
+  <div class="quiz-options" id="options">
+   <button onclick="choose(this)">Straight or fine</button>
+   <button onclick="choose(this)">Wavy</button>
+   <button onclick="choose(this)">Curly or coily</button>
+   <button onclick="choose(this)">A mix of textures</button>
+  </div>
+  <button class="btn" onclick="nextQuestion()">Continue ↗</button>
+  <p id="result" style="margin-top:20px;color:var(--leaf);font-size:13px"></p>
+ </div>
+</section>
+
+<section>
+ <div class="review reveal">
+  <div class="eyebrow" style="justify-content:center">Notes from the community</div>
+  <blockquote id="review">“A lovely reminder to slow down and make time for a little self-care.”</blockquote>
+  <p id="author">— Aanya · Community note</p>
+  <button onclick="changeReview(-1)">← Previous</button>
+  <button onclick="changeReview(1)">Next →</button>
+ </div>
+</section>
+
+<section id="faq">
+ <div class="container">
+  <div class="heading"><div class="eyebrow">Good to know</div><h2>Frequently asked questions</h2></div>
+  <div class="faq">
+   <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">How do I use the hair oil? <span>＋</span></button><div class="faq-answer">Apply a small amount and gently massage into your scalp and hair. Wash according to your usual routine.</div></div>
+   <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">How often should I use it? <span>＋</span></button><div class="faq-answer">Choose a frequency that feels comfortable for your hair and scalp. Start with occasional use and adjust as needed.</div></div>
+   <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">Is this suitable for every hair type? <span>＋</span></button><div class="faq-answer">Hair and scalp needs vary. Review the ingredient list and patch-test before first use.</div></div>
+   <div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">Can I use it overnight? <span>＋</span></button><div class="faq-answer">Follow the product's actual label directions. Avoid overnight use if it causes discomfort or irritation.</div></div>
+  </div>
+ </div>
+</section>
+
+<section class="newsletter">
+ <div class="container">
+  <div class="eyebrow" style="justify-content:center">Letters from nature</div>
+  <h2 style="font:45px 'Playfair Display';color:var(--green);margin:15px">A little goodness in your inbox.</h2>
+  <p class="section-intro" style="margin:auto">Join us for botanical stories and mindful rituals.</p>
+  <form onsubmit="subscribe(event)">
+   <input type="email" placeholder="Your email address" required>
+   <button class="btn">Subscribe ↗</button>
+  </form>
+ </div>
+</section>
+</main>
+
+<footer>
+ <div class="logo">HERBORA</div>
+ <p>Rooted in nature. Made for you.</p>
+ <p>© 2026 HERBORA · A conceptual student design project</p>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+let price=599,qty=1,cart=0,step=0,selected=false;
+const toast=message=>{
+ const el=document.getElementById('toast');
+ el.textContent=message;el.classList.add('show');
+ setTimeout(()=>el.classList.remove('show'),2500);
+};
+
+// Scroll progress bar
+window.addEventListener('scroll',()=>{
+ const max=document.documentElement.scrollHeight-innerHeight;
+ document.getElementById('progress').style.width=(scrollY/max*100)+'%';
+});
+
+// Reveal animations
+const observer=new IntersectionObserver(entries=>{
+ entries.forEach(entry=>{
+  if(entry.isIntersecting){
+   entry.target.classList.add('visible');
+   observer.unobserve(entry.target);
+  }
+ });
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+// Product selector
+function setSize(value,button){
+ price=value;
+ document.getElementById('price').textContent='₹'+price;
+ document.querySelectorAll('.sizes button').forEach(b=>b.classList.remove('active'));
+ button.classList.add('active');
+}
+function changeQty(amount){
+ qty=Math.max(1,Math.min(10,qty+amount));
+ document.getElementById('qty').textContent=qty;
+}
+function addCart(){
+ cart+=qty;
+ document.getElementById('cartCount').textContent=cart;
+ toast('HERBORA added to your bag ✳');
+}
+function showCart(){
+ toast(cart?'Your bag has '+cart+' item(s). Demo checkout only.':'Your bag is empty.');
+}
+
+// Hair quiz
+const questions=[
+ {q:'How would you describe your hair?',a:['Straight or fine','Wavy','Curly or coily','A mix of textures']},
+ {q:'What is your hair-care focus?',a:['Dry-looking lengths','Scalp-care routine','Frizz and manageability','A little self-care']},
+ {q:'How often do you enjoy hair care?',a:['A few times a week','Once a week','Every few weeks','When I have time']}
+];
+function choose(button){
+ document.querySelectorAll('#options button').forEach(b=>b.classList.remove('selected'));
+ button.classList.add('selected');selected=true;
+}
+function nextQuestion(){
+ if(!selected){toast('Please choose an option first.');return}
+ step++;selected=false;
+ if(step<questions.length){
+  document.getElementById('question').textContent=questions[step].q;
+  document.getElementById('options').innerHTML=questions[step].a.map(a=>`<button onclick="choose(this)">${a}</button>`).join('');
+ }else{
+  document.getElementById('question').textContent='Your ritual starts with you.';
+  document.getElementById('options').innerHTML='';
+  document.getElementById('result').textContent='Try a gentle, occasional pre-wash oil ritual. Adjust it to what feels comfortable for your hair and scalp.';
+  toast('Your ritual is ready ✳');
+ }
+}
+
+// Testimonials
+const reviews=[
+ ['“A lovely reminder to slow down and make time for a little self-care.”','— Aanya · Community note'],
+ ['“I love turning my hair-care routine into a mindful ritual.”','— Meera · Community note'],
+ ['“Botanical inspiration with a beautiful, calming feel.”','— Riya · Community note']
+];
+let reviewIndex=0;
+function changeReview(direction){
+ reviewIndex=(reviewIndex+direction+reviews.length)%reviews.length;
+ document.getElementById('review').textContent=reviews[reviewIndex][0];
+ document.getElementById('author').textContent=reviews[reviewIndex][1];
+}
+
+// FAQ accordion
+function toggleFaq(button){
+ const item=button.parentElement;
+ document.querySelectorAll('.faq-item').forEach(el=>{
+  if(el!==item)el.classList.remove('open');
+ });
+ item.classList.toggle('open');
+}
+
+// Newsletter demo
+function subscribe(event){
+ event.preventDefault();
+ toast('Thank you for joining HERBORA!');
+ event.target.reset();
+}
+</script>
+</body>
+</html>
